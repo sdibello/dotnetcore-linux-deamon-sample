@@ -21,12 +21,11 @@ namespace core_deamon
                     rollOnFileSizeLimit: true,
                     outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level:u3}] {Message:lj}{NewLine}{Exception}"                
                     )
-                .WriteTo.Console(restrictedToMinimumLevel: LogEventLevel.Warning)
+                .WriteTo.Console(restrictedToMinimumLevel: LogEventLevel.Information)
                 .CreateLogger();
 
 
             Log.Information("Starting Service");
-            Log.Information("Hello Information");
             Log.Debug("Hello Debug");
 
             Log.CloseAndFlush();
