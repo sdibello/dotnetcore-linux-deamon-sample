@@ -6,7 +6,7 @@ using Serilog.Events;
 using Serilog.Context;
 
 
-namespace core_deamon.core
+namespace core_deamon.logging
 {
     public static class logbase
     {
