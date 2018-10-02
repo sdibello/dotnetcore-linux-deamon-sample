@@ -13,7 +13,13 @@ namespace core_deamon.config
     class configLoader
     {
 
-        public static string Fill(object obj)
+        /// <summary>
+        /// take a ojbect, in this case a config class, and try to find values from the application.conf that fit the name of the properties.
+        /// this should also try to push in environmental variables, so this work with containers.
+        /// </summary>
+        /// <param name="obj">a class with public properties that are settable.</param>
+        /// <returns></returns>
+        public static void Fill(object obj)
         {
             if (obj == null) {
                 throw new ArgumentNullException(nameof(obj));
@@ -30,8 +36,6 @@ namespace core_deamon.config
                     property.SetValue(obj, convertedValue);
                 }
             }
-
-            return null;
         }
 
         public static string loadValue(object obj, string field, bool required = true)
