@@ -6,6 +6,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Serilog;
+using Serilog.Context;
+using Serilog.Events;
 
 namespace core_deamon
 {
@@ -40,6 +42,13 @@ namespace core_deamon
                 .ConfigureLogging((hostContext, configLogging) => {
                     configLogging.AddSerilog(new LoggerConfiguration()
                             .ReadFrom.Configuration(hostContext.Configuration)
+                            .Enrich.FromLogContext()
+                            .Enrich.WithThreadId()
+                            .WriteTo.File("{Logging:PathFormat}",
+                                rollingInterval: RollingInterval.Day,
+                                rollOnFileSizeLimit: true,
+                                outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level:u3}] [{ThreadId}]-{Message:lj}{NewLine}{Exception}")
+                            .WriteTo.Console(restrictedToMinimumLevel: LogEventLevel.Information)
                             .CreateLogger());
                     configLogging.AddConsole();
                     configLogging.AddDebug();
