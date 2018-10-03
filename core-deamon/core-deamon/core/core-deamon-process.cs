@@ -18,7 +18,6 @@ namespace core_deamon.core
         IHostingEnvironment environment;
         IConfiguration configuration;
 
-
         public core_deamon_process(IConfiguration configuration, ILogger<core_deamon_process> logger, IHostingEnvironment environment, IApplicationLifetime appLifetime)
         {
             this.configuration = configuration;
